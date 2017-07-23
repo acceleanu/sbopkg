@@ -4378,6 +4378,15 @@ main_search() {
             break
         fi
 
+#################### allow spaces around the search term
+        shopt -s extglob
+        # trim leading spaces
+        SEARCH_TERM="${SEARCH_TERM##*( )}"
+        # trim trailing spaces
+        SEARCH_TERM="${SEARCH_TERM%%*( )}"
+        shopt -u extglob
+#################### allow spaces around the search term
+
         if [[ $PKG ]]; then
             gen_search_package "$SEARCH_TERM" || break
         elif [[ $STRING ]]; then
